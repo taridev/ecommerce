@@ -42,3 +42,52 @@
         border-top: 0 none;
     }
 }
+
+.category {
+    height: 200px;
+    margin: 20px;
+    width: 300px !important;
+}
+
+.category h3 {
+    margin: 150px 0 0 0;
+    height: 50px;
+    padding: 0;
+    width: 100%;
+    display: block;
+    background: #5cb85c;
+    opacity: 0.85;
+}
+
+.category h3 a{
+    color: #fff !important;
+}
+
+.category h3 a:hover{
+    text-decoration: none;
+}
+
+.category-fresh {
+    background: url("../fresh.jpg") no-repeat center;
+    background-size: 120%;
+}
+
+.category-foodCupboard {
+    background: url("../foodCupboard.jpg") no-repeat center;
+    background-size: 120%;
+}
+
+.category-frozen {
+    background: url("../frozen.jpg") no-repeat center;
+    background-size: 120%;
+}
+
+.category-drinks{
+    background: url("../drinks.jpg") no-repeat center;
+    background-size: 120%;
+}
+
+
+.table > tbody > tr > td {
+    vertical-align: middle !important;
+}

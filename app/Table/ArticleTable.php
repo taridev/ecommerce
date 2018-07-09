@@ -42,4 +42,15 @@ class ArticleTable extends Table
             true
         );
     }
+
+    public function getCategories() {
+        return $this->query(
+            "SELECT DISTINCT SUBSTRING(link, LENGTH('images/') + 1, LOCATE('.php',link) - 2*LENGTH('.php')) AS name FROM ". $this->table
+        );
+    }
+
+    public function findByCategory($category)
+    {
+        return $this->query('SELECT * FROM ' . $this->table . ' WHERE link like "%'. $category . '%"');
+    }
 }

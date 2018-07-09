@@ -122,9 +122,9 @@ $auth = new Auth();
     </div>
 </nav>
 
-<main class="container">
+<main>
 
-    <div class="container" style="padding-top: 100px;">
+    <div>
         <?php echo $content; ?>
 
     </div>

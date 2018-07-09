@@ -13,7 +13,7 @@ use Core\Database\MysqlDatabase;
 
 class App
 {
-    public $title = 'eCommerce';
+    public $title = 'eCommerçant';
     private static $instance_;
     private $db_instance;
 

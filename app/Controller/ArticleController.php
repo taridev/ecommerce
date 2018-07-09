@@ -18,17 +18,20 @@ class ArticleController extends AppController
     {
         parent::__construct();
         $this->loadModel('Article');
+        $this->categories = $this->Article->getCategories();
     }
 
     public function index()
     {
         $items = $this->Article->all();
-        $this->render('article.index', compact('items'));
+        $categories = $this->categories;
+        $this->render('article.index', compact('items', 'categories'));
     }
 
-    public function add() {
-        $panier = new Panier();
-        $panier->addArticle($_GET['id']);
-        header('location: ?page=panier.index');
+    public function filter()
+    {
+        $items = $this->Article->findByCategory($_GET['name']);
+        $categories = $this->categories;
+        $this->render('article.index', compact('items', 'categories'));
     }
 }

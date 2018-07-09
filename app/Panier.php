@@ -19,7 +19,8 @@ class Panier
         return $_SESSION['panier'];
     }
 
-    public function addArticle($articleId) {
+    public function addArticle($articleId)
+    {
         if (isset($_SESSION['panier'][$articleId])) {
             $_SESSION['panier'][$articleId] ++;
         } else {
@@ -27,11 +28,17 @@ class Panier
         }
     }
 
-    public function removeArticle($articleId) {
+    public function removeArticle($articleId)
+    {
         if (isset($_SESSION['panier'][$articleId]) and $_SESSION['panier'][$articleId] > 1) {
             $_SESSION['panier'][$articleId] --;
         } elseif (isset($_SESSION['panier'][$articleId]) and $_SESSION['panier'][$articleId] == 1) {
             unset($_SESSION['panier'][$articleId]);
         }
+    }
+
+    public function reinit()
+    {
+        $_SESSION['panier'] = null;
     }
 }

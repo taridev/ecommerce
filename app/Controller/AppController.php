@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Table\CategoryTable;
 use Core\Controller\Controller;
 use App\App;
 
