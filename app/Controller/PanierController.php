@@ -17,42 +17,79 @@ class PanierController extends AppController
         parent::__construct();
     }
 
+    /**
+     * Méthode du controlleur appelée pour afficher le contenu du panier
+     */
     public function index()
     {
         $this->loadModel('Article');
         $ids = [];
-        foreach (Panier::getInstance() as $id => $value)
+        $articles = [];
+        foreach (Panier::getInstance() as $id => $value) {
             $ids [] = $id;
-        $items = [];
-        if (!empty($ids)) {
-            $items = $this->Article->find($ids);
         }
-        $this->render('panier.index', compact('items'));
+        if (!empty($ids)) {
+            $articles = $this->Article->find($ids);
+        }
+        $this->render('panier.index', compact('articles'));
     }
 
+    /**
+     * Méthode utilisée pour ajouter un article au panier
+     */
     public function add() {
         $panier = new Panier();
         $this->loadModel('Article');
         $article = $this->Article->find($_GET['id']);
-        if ($article and $article->quantity > 0) {
+        if ($article) {
             $panier->addArticle($_GET['id']);
-            $this->Article->update(
-                $_GET['id'],
-                ['quantity' => $article->quantity - 1]
-            );
             header('location: ?page=panier.index');
-        } elseif (!$article) {
-            $errors [] = 'Impossible de trouver le produit recherché.';
-        } else {
-            $errors [] = 'Désolé nous sommes actuellement en rupture de stock pour le produit demandé.';
+            return;
         }
+        $errors [] = 'Impossible de trouver le produit recherché.';
         $this->render('panier.error', compact('errors'));
     }
 
+    /**
+     * Méthode utilisée pour valider la commander
+     */
     public function valider()
     {
-        $panier = new Panier();
-        $panier->reinit();
-        $this->render('panier.confirmation');
+        $panier = Panier::getInstance();
+
+        // Si le panier est vide on retourne à l'index du panier
+        if (empty($panier)) {
+            header('location: ?page=panier.index');
+        }
+
+
+        $this->loadModel('Article');
+        $articlesIndisponibles = [];
+        $articlesValides = [];
+        $errors = [];
+
+        // On parcourt le panier pour trouver les articles épuisés, inexistant ou valides
+        foreach ($panier as $articleId => $articleQteDemandee) {
+            $article = $this->Article->find($articleId);
+            if (!$article) {
+                // L'article est inexistant on récupère l'id pour en informer l'utilisateur
+                $errors [] = "La référence au produit ". $articleId ." est introuvable";
+            } elseif ($article->quantity < $articleQteDemandee) {
+                // L'article est indisponible on le stock pour l'afficher dans la vue
+                $articlesIndisponibles [] = $article;
+            } else {
+                // Pour chaque article valide on stock l'article et sa qantité
+                $articlesValides [] = ['article' => $article, 'quantity' => $articleQteDemandee];
+                // et on met à jour la quantité en base de données en soustrayant la quantité demandée
+                $this->Article->update(
+                    $articleId,
+                    ['quantity' => $article->quantity - $articleQteDemandee]
+                );
+            }
+        }
+        // Au final on réinitialise le panier
+        Panier::reinit();
+        // On appelle la méthode render(vue) qui se charge de mettre en forme les données.
+        $this->render('panier.confirmation', compact('errors', 'articlesValides', 'articlesIndisponibles'));
     }
 }

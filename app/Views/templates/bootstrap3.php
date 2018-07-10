@@ -18,9 +18,7 @@ $auth = new Auth();
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <title>
-        <?= \App\App::getInstance()->title; ?>
-    </title>
+    <title><?= \App\App::getInstance()->title; ?></title>
 
 </head>
 <body>
@@ -49,10 +47,10 @@ $auth = new Auth();
                             and explode('.', $_GET['page'])[0] == 'panier') ? ' class="active"' : ''
                 ];
                 ?>
+
                 <?php foreach ($nav as $label => $class) :
                     ?>
-
-                    <li<?= $class; ?>><a href="?page=<?= $label . '.index'; ?>"><?= ucfirst($label); ?></a></li>
+                 <li<?= $class; ?>><a href="?page=<?= $label . '.index'; ?>"><?= ucfirst($label); ?></a></li>
 
                 <?php endforeach; ?>
 
@@ -75,12 +73,12 @@ $auth = new Auth();
                                             <div class="form-group">
                                                 <label for="login">Login</label>
                                                 <input type="text" class="form-control" id="login"
-                                                       name="login" placeholder="admin" required="required" autofocus="autofocus">
+                                                       name="login" placeholder="nom d'utilisateur" required="required" autofocus="autofocus">
                                             </div>
                                             <div class="form-group">
                                                 <label for="password">Password</label>
                                                 <input type="password" class="form-control" id="password"
-                                                       name="password" placeholder="admin" required="required">
+                                                       name="password" placeholder="mot de passe" required="required">
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-success btn-block btn-md">
@@ -125,7 +123,7 @@ $auth = new Auth();
 <main>
 
     <div>
-        <?php echo $content; ?>
+        <?= $content; ?>
 
     </div>
 

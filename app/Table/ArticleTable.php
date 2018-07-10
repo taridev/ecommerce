@@ -15,9 +15,9 @@ class ArticleTable extends Table
     protected $table = 'article';
 
     /**
-     * Récupère la liste des expositions
+     * Récupère la liste des articles
      *
-     * @return \App\Entity\OeuvreEntity
+     * @return \App\Entity\ArticleEntity
      */
     public function all()
     {
@@ -25,10 +25,10 @@ class ArticleTable extends Table
     }
 
     /**
-     * Récupère une exposition
+     * Récupère un article
      *
      * @param int $id
-     * @return \App\Entity\OeuvreEntity
+     * @return \App\Entity\ArticleEntity
      */
     public function find($id)
     {
@@ -43,6 +43,11 @@ class ArticleTable extends Table
         );
     }
 
+    /**
+     * Récupère la liste des catégories
+     *
+     * @return mixed un tableau contenant les noms des catégories
+     */
     public function getCategories() {
         return $this->query(
             "SELECT DISTINCT SUBSTRING(link, LENGTH('images/') + 1, LOCATE('.php',link) - 2*LENGTH('.php')) AS name FROM ". $this->table

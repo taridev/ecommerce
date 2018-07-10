@@ -22,9 +22,19 @@ class AppController extends Controller
         return $this->template;
     }
 
+    /**
+     * Méthode qui permet d'accéder au DAO demandé
+     * @param $model_name
+     * @return \App\Table\
+     */
     protected function loadModel($model_name)
     {
         $this->$model_name = App::getInstance()->getTable($model_name);
+    }
+
+    public function moduleNotFound()
+    {
+        $this->notFound();
     }
 
     protected function forbidden()

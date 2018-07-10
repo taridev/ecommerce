@@ -25,7 +25,7 @@ class UserController extends AppController
         if (!empty($_POST) and isset($_POST['login']) and isset($_POST['password'])) {
             $auth = new Auth();
             $result = $this->User->get($_POST['login'], null, true);
-            if (strcmp(sha1($_POST['password']), $result[0]->password) === 0) {
+            if ($result and strcmp(sha1($_POST['password']), $result->password) === 0) {
                 $auth->login($_POST['login']);
                 return header('Location: .');
             } else {

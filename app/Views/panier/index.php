@@ -15,29 +15,29 @@ $coutTotal = 0;
             </tr>
         </thead>
 
-        <?php foreach ($items as $item) :
+        <?php foreach ($articles as $article) :
         ?>
 
         <tr>
             <td>
-                <img height="60" src="<?= $item->link; ?>">
+                <img height="60" src="<?= $article->link; ?>">
             </td>
             <td>
-                <?= $item->description; ?>
+                <?= $article->description; ?>
             </td>
             <td>
-                <?= $panier[$item->id]; ?>
+                <?= $panier[$article->id]; ?>
             </td>
             <td>
-                <?= $item->quantity; ?>
+                <?= $article->quantity; ?>
             </td>
             <td class="text-right">
-                <?= $item->price * $panier[$item->id] .'€'; ?>
+                <?= $article->price * $panier[$article->id] .'€'; ?>
             </td>
         </tr>
 
         <?php
-            $coutTotal += $item->price * $panier[$item->id];
+            $coutTotal += $article->price * $panier[$article->id];
         endforeach; ?>
 
 

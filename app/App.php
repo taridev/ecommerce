@@ -16,6 +16,11 @@ class App
     public $title = 'eCommerçant';
     private static $instance_;
     private $db_instance;
+    private $module_list = [
+        'article',
+        'panier',
+        'user'
+    ];
 
     /**
      * Retourne l'instance de l'application si elle existe déjà
@@ -29,6 +34,11 @@ class App
             self::$instance_ = new App();
         }
         return self::$instance_;
+    }
+
+    public function isModule($module)
+    {
+        return in_array($module, $this->module_list);
     }
 
     /**

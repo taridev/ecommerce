@@ -2,9 +2,9 @@
 
 namespace Core\Entity;
 
-class Entity
+abstract class Entity
 {
-    public function __get($key)
+    public function __get($key ='Id')
     {
         $method = 'get'. ucfirst($key);
         $this->$key = $this->$method();

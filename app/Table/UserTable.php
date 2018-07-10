@@ -16,6 +16,6 @@ class UserTable extends Table
     protected $table = 'user';
 
     public function get($login) {
-        return $this->query('SELECT * FROM '. $this->table .' WHERE last_name = "' .$login .'"');
+        return $this->query('SELECT * FROM '. $this->table .' WHERE last_name = "' .$login .'"', null ,true);
     }
 }

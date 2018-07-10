@@ -37,7 +37,7 @@ class Panier
         }
     }
 
-    public function reinit()
+    public static function reinit()
     {
         $_SESSION['panier'] = null;
     }

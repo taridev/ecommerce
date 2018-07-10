@@ -9,29 +9,36 @@
 namespace App\Controller;
 
 
-use App\Panier;
-
 class ArticleController extends AppController
 {
 
     public function __construct()
     {
         parent::__construct();
+        // Chargement du DAO d'article
         $this->loadModel('Article');
-        $this->categories = $this->Article->getCategories();
     }
 
+    /**
+     * Permet d'aficher tous les articles
+     */
     public function index()
     {
-        $items = $this->Article->all();
-        $categories = $this->categories;
-        $this->render('article.index', compact('items', 'categories'));
+        // Chargements de tous les articles depuis le DAO
+        $articles = $this->Article->all();
+        // Chargements de toutes les catégories depuis le DAO
+        $categories = $this->Article->getCategories();
+        // Envoi à la vue article/index.php des données collectées ($categories et $articles)
+        $this->render('article.index', compact('articles', 'categories'));
     }
 
+    /**
+     * Permet de filtrer les articles en fonction d'une catégorie
+     */
     public function filter()
     {
-        $items = $this->Article->findByCategory($_GET['name']);
-        $categories = $this->categories;
-        $this->render('article.index', compact('items', 'categories'));
+        $articles = $this->Article->findByCategory($_GET['name']);
+        $categories = $this->Article->getCategories();
+        $this->render('article.index', compact('articles', 'categories'));
     }
 }

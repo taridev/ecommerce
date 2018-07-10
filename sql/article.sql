@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `link` varchar(255) NOT NULL,
-  `Description` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `price` float NOT NULL,
   `quantity` int(11) NOT NULL,
   PRIMARY KEY (`id`)
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `article` (
 -- Contenu de la table `article`
 --
 
-INSERT INTO `article` (`id`, `link`, `Description`, `price`, `quantity`) VALUES
+INSERT INTO `article` (`id`, `link`, `description`, `price`, `quantity`) VALUES
 (1, 'images/fresh.php/41xYnnF58eL.jpg', 'Orange for America, pack of 5.', 3.99, 10),
 (2, 'images/fresh.php/300x300bb.jpg', 'Brocoli pack of 4', 5.99, 10),
 (3, 'images/fresh.php/0002028_red-long-pepper.jpeg', 'Variety of pepper , pack of 10', 5.99, 10),
