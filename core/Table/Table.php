@@ -4,7 +4,7 @@ namespace Core\Table;
 
 use Core\Database\Database;
 
-class Table
+abstract class Table
 {
     protected $table;
     protected $db;

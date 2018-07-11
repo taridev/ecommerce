@@ -11,23 +11,23 @@ class Auth
      * @param string $password
      * @return boolean
      */
-    public function login($username)
+    public static function login($username)
     {
         $_SESSION['auth'] = $username;
         return true;
     }
 
-    public function logged()
+    public static function logged()
     {
         return isset($_SESSION['auth']);
     }
 
-    public function username()
+    public static function username()
     {
         return $_SESSION['auth'];
     }
 
-    public function logout()
+    public static function logout()
     {
         session_destroy();
         header('Location: .');

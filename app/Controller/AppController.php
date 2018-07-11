@@ -34,7 +34,8 @@ class AppController extends Controller
 
     public function moduleNotFound()
     {
-        $this->notFound();
+        $this->render('app.404');
+        exit();
     }
 
     protected function forbidden()

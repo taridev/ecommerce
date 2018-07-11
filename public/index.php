@@ -28,15 +28,17 @@ if (isset($_GET['page'])) {
 /* Parsing de la page */
 $page = explode('.', $page);
 
+
+
 /* On vérifie avant tout que l'application dispose du module demandé */
-if (App::getInstance()->isModule($page[0])) {
+if (!empty($page[0]) and App::getInstance()->isModule($page[0])) {
     $controller = '\\App\\Controller\\' . ucfirst($page[0]) . 'Controller';
 } else {
     $controller = '\\App\\Controller\\AppController';
 }
 
 $controller = new $controller();
-$vue = $page[1];
+$vue = isset($page[1]) ? $page[1] : 'notfound';
 
 /* On vérifie que la vue existe dans le controlleur */
 if (is_callable(array($controller, $vue))) {

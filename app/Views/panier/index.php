@@ -3,7 +3,7 @@ $panier = \App\Panier::getInstance();
 $coutTotal = 0;
 ?>
 <div class="container">
-    <h1 class="text-center">Votre Panier</h1>
+    <h2 class="text-center" style="margin-bottom: 40px;">Votre Panier</h2>
     <table class="table">
         <thead>
             <tr>

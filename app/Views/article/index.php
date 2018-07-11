@@ -1,5 +1,5 @@
 
-<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-evenly;">
+<div style="display: flex; flex-direction: row; flex-wrap: wrap; justify-content: center;">
     <?php foreach ($categories as $category) :
         ?>
 

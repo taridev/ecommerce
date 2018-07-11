@@ -13,7 +13,7 @@ $auth = new Auth();
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="favicon.png">
-    <link rel="stylesheet" type="text/css" href="css/<?= $this->template . '.css'; ?>">
+    <link rel="stylesheet" type="text/css" href="css/<?= $this->getTemplate() . '.css'; ?>">
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -56,7 +56,7 @@ $auth = new Auth();
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <?php if (!$auth->logged()) :
+                <?php if (!Auth::logged()) :
                     ?>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -84,6 +84,9 @@ $auth = new Auth();
                                                 <button type="submit" class="btn btn-success btn-block btn-md">
                                                     Connexion
                                                 </button>
+                                                <a href="?page=user.register" class="btn btn-block btn-md">
+                                                    Créer un compte
+                                                </a>
                                             </div>
                                         </form>
                                     </div>
@@ -96,7 +99,7 @@ $auth = new Auth();
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <b><span class="glyphicon glyphicon-user"></span>&nbsp;<?= $auth->username(); ?></b>
+                            <b><span class="glyphicon glyphicon-user"></span>&nbsp;<?= Auth::username(); ?></b>
                             <span class="caret"></span>
                         </a>
                         <ul id="login-dp" class="dropdown-menu">
