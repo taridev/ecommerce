@@ -14,15 +14,7 @@ class ArticleTable extends Table
 {
     protected $table = 'article';
 
-    /**
-     * Récupère la liste des articles
-     *
-     * @return \App\Entity\ArticleEntity
-     */
-    public function all()
-    {
-        return $this->query('SELECT * FROM '. $this->table);
-    }
+
 
     /**
      * Récupère un article

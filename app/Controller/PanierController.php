@@ -103,9 +103,5 @@ class PanierController extends AppController
                 );
             }
         }
-        // Au final on réinitialise le panier
-        Panier::reinit();
-        // On appelle la méthode render(vue) qui se charge de mettre en forme les données.
-        $this->render('panier.confirmation', compact('errors', 'articlesValides', 'articlesIndisponibles'));
     }
 }

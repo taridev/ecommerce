@@ -48,5 +48,5 @@ $coutTotal = 0;
         </tfoot>
     </table>
 
-    <p class="text-right"><a class="btn btn-success" role="button" href="?page=panier.valider">Valider votre panier</a></p>
+    <p class="text-right"><a class="btn btn-success" role="button" href="?page=commande.create">Valider votre panier</a></p>
 </div>

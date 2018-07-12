@@ -16,20 +16,13 @@ class App
     public $title = 'eCommerçant';
     private static $instance_;
     private $db_instance;
-    private $module_list;
-
-    public function __construct()
-    {
-        if ($handle = opendir('../app/Views/')) {
-            $this->module_list = [];
-            while (false !== ($file = readdir($handle))) {
-                if ($file != "." and $file != ".." and $file != "app" and $file != "templates" and !is_file($file)) {
-                    $this->module_list [] = strtolower($file);
-                }
-            }
-            closedir($handle);
-        }
-    }
+    private $module_list = [
+        'article',
+        'user',
+        'app',
+        'commande',
+        'panier'
+    ];
 
     /**
      * Retourne l'instance de l'application si elle existe déjà

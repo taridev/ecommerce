@@ -28,10 +28,7 @@ class UserController extends AppController
         if (isset($_POST['login'], $_POST['password'])) {
             $result = $this->User->get($_POST['login'], null, true);
             if ($result and strcmp(sha1($_POST['password']), $result->password) === 0) {
-                AuthService::login($_POST['login']);
-                if (!empty($_POST['referer'])) {
-                    header('Location: '.$_POST['referer']);
-                }
+                AuthService::login($result->id, $result->username);
                 $this->render('user.loginConfirmation');
                 exit();
             } else {

@@ -7,13 +7,14 @@ class AuthService
     /**
      * Crée une session si le nom d'utilisateur et le mot de passe correspondent
      *
+     * @param string id
      * @param string $username
-     * @param string $password
      * @return boolean
      */
-    public static function login($username)
+    public static function login($id, $username)
     {
-        $_SESSION['auth'] = $username;
+        $_SESSION['auth']['id'] = $id;
+        $_SESSION['auth']['username'] = $username;
         return true;
     }
 
@@ -24,7 +25,12 @@ class AuthService
 
     public static function username()
     {
-        return $_SESSION['auth'];
+        return $_SESSION['auth']['username'];
+    }
+
+    public static function id()
+    {
+        return $_SESSION['auth']['id'];
     }
 
     public static function logout()
