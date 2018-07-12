@@ -50,7 +50,7 @@ class ArticleTable extends Table
      */
     public function getCategories() {
         return $this->query(
-            "SELECT DISTINCT SUBSTRING(link, LENGTH('images/') + 1, LOCATE('.php',link) - 2*LENGTH('.php')) AS name FROM ". $this->table
+            "SELECT DISTINCT category FROM ". $this->table
         );
     }
 

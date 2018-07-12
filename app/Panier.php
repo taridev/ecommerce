@@ -19,7 +19,7 @@ class Panier
         return $_SESSION['panier'];
     }
 
-    public function addArticle($articleId)
+    public static function addArticle($articleId)
     {
         if (isset($_SESSION['panier'][$articleId])) {
             $_SESSION['panier'][$articleId] ++;
@@ -28,7 +28,7 @@ class Panier
         }
     }
 
-    public function removeArticle($articleId)
+    public static function removeArticle($articleId)
     {
         if (isset($_SESSION['panier'][$articleId]) and $_SESSION['panier'][$articleId] > 1) {
             $_SESSION['panier'][$articleId] --;

@@ -45,8 +45,8 @@
 
 .category {
     height: 200px;
-    margin: 40px;
-    width: 320px !important;
+    margin: 5px;
+    width: 280px !important;
 }
 
 .category h3 {
@@ -72,7 +72,7 @@
     background-size: 120%;
 }
 
-.category-foodCupboard {
+.category-cupboard {
     background: url("../foodCupboard.jpg") no-repeat center;
     background-size: 120%;
 }

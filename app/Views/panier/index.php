@@ -26,7 +26,7 @@ $coutTotal = 0;
                 <?= $article->description; ?>
             </td>
             <td>
-                <?= $panier[$article->id]; ?>
+                <a href="?page=panier.del&amp;id=<?= $article->id; ?>" class="btn btn-default btn-xs">&#x2D;</a>&nbsp;<?= $panier[$article->id]; ?>&nbsp;<a href="?page=panier.add&amp;id=<?= $article->id; ?>" class="btn btn-default btn-xs">+</a>
             </td>
             <td>
                 <?= $article->quantity; ?>

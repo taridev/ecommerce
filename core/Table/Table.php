@@ -39,6 +39,7 @@ abstract class Table
 
     public function extract($key, $value)
     {
+        $return = [];
         $records = $this->all();
         foreach ($records as $v) {
             $return[$v->$key] = $v->$value;
@@ -69,6 +70,11 @@ abstract class Table
         );
     }
 
+    /**
+     * @param $id id de l'éléments à mettre à jour
+     * @param $fields tableau de paramêtre à mettre à jour ['param1' => 'new value', ... ]
+     * @return mixed
+     */
     public function update($id, $fields)
     {
         $sql_parts = [];
@@ -95,6 +101,10 @@ abstract class Table
         );
     }
 
+    /**
+     * @param $fields tableau de paramètres à enter pour créer l'entité ['param1' => 'value1', ... ]
+     * @return mixed
+     */
     public function create($fields)
     {
         $sql_parts = [];

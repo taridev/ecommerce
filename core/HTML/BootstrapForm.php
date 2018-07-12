@@ -29,6 +29,7 @@ class BootstrapForm extends Form
                 $class = $class . ' ' . $options['class'];
             }
         }
+        $required = isset($options['required']) ? ' required="'. $options['required'] . '" ' : null;
         $help_block = isset($options['help_block']) ?
             '<span class="help-block">'. $options['help_block'] .'</span>' : null;
         $label = '<label>'. $label .'</label>';
@@ -36,12 +37,12 @@ class BootstrapForm extends Form
         if ($type === 'textarea') {
             $input = '<textarea name="'. $name .'" class="form-control">'. $value .'</textarea>';
         } else {
-            $input = '<input type="'. $type .'" name="'. $name .'" value="'. $value .'" class="'. $class .'">';
+            $input = '<input type="'. $type .'" name="'. $name .'" value="'. $value .'" class="'. $class .'"'. $required .'>';
         }
         return ($type != 'file') ? $this->surround($label . $input . $help_block) : $label . $input;
     }
 
-    public function hidden($name, $options = [])
+    public function hidden($name)
     {
         return '<input type="hidden" name="'. $name .'" value="'. $this->getValue($name) . '" class="form-control">';
     }

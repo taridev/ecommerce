@@ -3,8 +3,8 @@
     <?php foreach ($categories as $category) :
         ?>
 
-        <div class="category category-<?= $category->name; ?>">
-            <h3 class="text-center" style="line-height: 40px;"><a href="?page=article.filter&amp;name=<?= $category->name; ?>"><?= $category->name; ?></a></h3>
+        <div class="category category-<?= $category->category; ?>">
+            <h3 class="text-center" style="line-height: 40px;"><a href="?page=article.filter&amp;name=<?= $category->category; ?>"><?= $category->category; ?></a></h3>
         </div>
     <?php endforeach; ?>
 

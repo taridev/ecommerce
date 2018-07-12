@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use App\Panier;
+use App\Service\AuthService;
 
 class PanierController extends AppController
 {
@@ -38,11 +39,10 @@ class PanierController extends AppController
      * Méthode utilisée pour ajouter un article au panier
      */
     public function add() {
-        $panier = new Panier();
         $this->loadModel('Article');
         $article = $this->Article->find($_GET['id']);
         if ($article) {
-            $panier->addArticle($_GET['id']);
+            Panier::addArticle($_GET['id']);
             header('location: ?page=panier.index');
             return;
         }
@@ -50,18 +50,31 @@ class PanierController extends AppController
         $this->render('panier.error', compact('errors'));
     }
 
+    public function del() {
+        $this->loadModel('Article');
+        $article = $this->Article->find($_GET['id']);
+        if ($article) {
+            Panier::removeArticle($article->id);
+        }
+        header('location: ?page=panier.index');
+    }
+
     /**
      * Méthode utilisée pour valider la commander
      */
     public function valider()
     {
+        if (!AuthService::logged()) {
+            header('Location: ?page=user.login');
+            exit();
+        }
         $panier = Panier::getInstance();
 
         // Si le panier est vide on retourne à l'index du panier
         if (empty($panier)) {
             header('location: ?page=panier.index');
+            exit();
         }
-
 
         $this->loadModel('Article');
         $articlesIndisponibles = [];
@@ -79,7 +92,10 @@ class PanierController extends AppController
                 $articlesIndisponibles [] = $article;
             } else {
                 // Pour chaque article valide on stock l'article et sa qantité
-                $articlesValides [] = ['article' => $article, 'quantity' => $articleQteDemandee];
+                $articlesValides [] = [
+                    'article' => $article,
+                    'quantity' => $articleQteDemandee
+                ];
                 // et on met à jour la quantité en base de données en soustrayant la quantité demandée
                 $this->Article->update(
                     $articleId,

@@ -11,7 +11,7 @@
 
     </form>
 
-    <?php if ($errors) :?>
+    <?php if (isset($errors) and !empty($errors)) :?>
 
         <div class="alert alert-danger">
             Le nom d'utilisateur et/ou le mot de passe sont incorrects.

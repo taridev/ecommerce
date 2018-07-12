@@ -8,8 +8,8 @@
 
 namespace App\Controller;
 
+use App\Service\AuthService;
 use Core\HTML\BootstrapForm;
-use App\Auth;
 
 class UserController extends AppController
 {
@@ -21,61 +21,61 @@ class UserController extends AppController
 
     public function login()
     {
+        if (AuthService::logged()) {
+            header('Location: .');
+        }
         $errors = false;
-        if (!empty($_POST) and isset($_POST['login'], $_POST['password'])) {
+        if (isset($_POST['login'], $_POST['password'])) {
             $result = $this->User->get($_POST['login'], null, true);
             if ($result and strcmp(sha1($_POST['password']), $result->password) === 0) {
-                Auth::login($_POST['login']);
-                return header('Location: .');
+                AuthService::login($_POST['login']);
+                if (!empty($_POST['referer'])) {
+                    header('Location: '.$_POST['referer']);
+                }
+                $this->render('user.loginConfirmation');
+                exit();
             } else {
                 $errors = true;
             }
         }
         $form = new BootstrapForm($_POST);
-        $this->render('user.login', compact('form', 'errors'));
+        $this->render('user.loginForm', compact('form', 'errors'));
     }
 
     public function register() {
-        if(Auth::logged()) {
+        if (AuthService::logged()) {
             header('Location: .');
         }
 
         $form = new BootstrapForm($_POST);
-        $errors = [];
-        $success = false;
 
-        if (isset($_POST['login'], $_POST['password'], $_POST['confirmation'], $_POST['mail'])) {
-            if (empty($_POST['login'])) {
-                $errors [] = 'Vous devez spécifier un nom d\'utilisateur.';
-            }
-            if (empty($_POST['password'])) {
-                $errors [] = 'Vous ne pouvez pas avoir un mot de passe vide.';
-            }
-            if (strcmp($_POST['password'], $_POST['confirmation']) != 0) {
-                $errors [] = 'les mots de passe ne correspondent pas';
-            }
-            if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
-                $errors [] = 'L\'adresse founie n\'est pas une adresse email valide';
-            }
+        if (isset($_POST['login'], $_POST['password'], $_POST['confirmation'])) {
+
+            $errors = AuthService::checkRegisterForm();
+
             if ($this->User->get($_POST['login'], null, true)) {
                 $errors [] = 'Le nom d\'utilisateur est déjà pris.';
-                $this->render('user.register', compact('errors', 'form'));
+                $this->render('user.registerForm', compact('errors', 'form'));
+                exit();
             }
+
             if (empty($errors)) {
                 $this->User->create([
-                    'last_name' => $_POST['login'],
+                    'username' => $_POST['login'],
                     'password' => sha1($_POST['password']),
-                    'email' => $_POST['mail']
                 ]);
-                Auth::login($_POST['login']);
-                $success = true;
+                AuthService::login($_POST['login']);
+                $this->render('user.registerConfirmation');
+                exit();
             }
+
         }
-        $this->render('user.register', compact('errors', 'form', 'success'));
+        $this->render('user.registerForm', compact('form'));
     }
 
     public function logout()
     {
-        Auth::logout();
+        AuthService::logout();
+        header('Location: .');
     }
 }
