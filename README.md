@@ -11,4 +11,7 @@ directement en base et stocker son mot de passe en sha1.
 ## Structure:
 * Le point d'accès au site se fait sur le fichier _/public/index.php_. C'est ce fichier qui sert de routeur.
 
+## Dépendances:
+* Pour l'impression de la facture en PDF : pdflib-lite 
+
 
