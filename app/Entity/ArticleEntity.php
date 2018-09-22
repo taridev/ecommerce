@@ -12,5 +12,8 @@ use Core\Entity\Entity;
 
 class ArticleEntity extends Entity
 {
-
+    public $id;
+    public $description;
+    public $price;
+    public $link;
 }

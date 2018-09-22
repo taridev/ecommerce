@@ -15,6 +15,7 @@ use App\App;
 use App\Panier;
 use App\Service\AuthService;
 use App\Service\CommandeService;
+use Core\Auth\Auth;
 
 class CommandeController extends AppController
 {
@@ -72,6 +73,9 @@ class CommandeController extends AppController
 
     public function toPdf()
     {
+        if (!AuthService::logged() or empty($_GET['id'])) {
+            header('Location: .');
+        }
         $ids = [];
         $articlesCommandes = $this->CommandeArticle->find($_GET['id']);
         foreach ($articlesCommandes as $articles) {

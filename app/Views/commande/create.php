@@ -38,7 +38,7 @@
 
     <div style="float: right; text-align: right;">
         <h3>Imprimer votre facture</h3>
-        <a class="btn btn-default"href="?page=commande.toPdf&amp;id=<?= $idCommande; ?>"><span class="glyphicon glyphicon-print"></span></a>
+        <a class="btn btn-default"href="?page=commande.toPdf&amp;id=<?= $idCommande; ?>"><span class="glyphicon glyphicon-print"></span>&nbsp;PDF</a>
     </div>
 
     <?php $coutTotal = 0; ?>

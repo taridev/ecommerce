@@ -49,8 +49,8 @@ class CommandeService
             $p->setfont($font, 10.0);
             $p->set_text_pos(50,$y);
             $p->continue_text(' - '. $article->description);
-            $p->set_text_pos(500,$y);
-            $p->continue_text($article->quantity.'x'.$article->quantity .' = '. $article->quantity*$article->price);
+            $p->set_text_pos(510,$y);
+            $p->continue_text('x'.$article->quantity .' = '. $article->quantity*$article->price);
             $prixTotal += $article->quantity*$article->price;
             if ($y <= 120) {
                 $y = 800;
